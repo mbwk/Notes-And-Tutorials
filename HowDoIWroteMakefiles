@@ -1,4 +1,4 @@
-# EXAMPLE MAKEFILE, COURTESY OF KARL M. BIRCH
+# EXAMPLE MAKEFILE, heavily modified by Karl M. Birch from some University slides he found
 # heavily based on several web resources, Google is your friend
 # one particularly helpful one: http://owen.sj.ca.us/rkowen/howto/slides/make/slides/makesuff.html
 # there are many more helpful make tutorials, oddly many of them from universities
