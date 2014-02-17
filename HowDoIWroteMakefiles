@@ -14,6 +14,8 @@ CPPFLAGS	= -std=c++03 -pedantic -Wall -Werror # C++ compiler flags
 LD		= $(CXX) # Linker. luckily gcc does everything
 LDFLAGS		= -lboost_filesystem -lboost_system # libraries you want to link to. these
 						    # particular examples are boost libraries
+						    # required to compile a program using
+						    # boost::filesystem
 RM		= rm # rm, and whatever else you want to do to customise it
 
 # Here we specify things like the name of our final executable, names of all source files
