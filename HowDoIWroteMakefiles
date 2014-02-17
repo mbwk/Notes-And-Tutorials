@@ -1,0 +1,42 @@
+# EXAMPLE MAKEFILE, COURTESY OF KARL M. BIRCH
+# heavily based on several web resources, Google is your friend
+# one particularly helpful one: http://owen.sj.ca.us/rkowen/howto/slides/make/slides/makesuff.html
+# there are many more helpful make tutorials, oddly many of them from universities
+
+# Begin:
+
+# This is where you do your tooling. You must specify which compiler
+# (e.g. gcc/g++/clang/clang++) you are using, as well as compiler
+# flags. Ditto for your linker and miscellaneous tools like whatever
+# you use to remove/move/package your files.
+CC		= gcc # C compiler
+CXX		= g++ # C++ compiler
+CPPFLAGS	= -std=c++03 -pedantic -Wall -Werror # C++ compiler flags
+LD		= $(CXX) # Linker. luckily gcc does everything
+LDFLAGS		= -lboost_filesystem -lboost_system # libraries you want to link to. these
+						    # particular examples are boost libraries
+RM		= rm # rm, and whatever else you want to do to customise it
+
+# Here we specify things like the name of our final executable, names of all source files
+EXE		= worksheet # final exectuable, so after making we can do "./worksheet"
+SRCS		= main.cpp # source file(s)
+OBJS		= ${SRCS:.cpp=.o} # object files, same as SRSC except change the suffix to .o
+
+#clear suffixes
+.SUFFIXES:
+#define our suffixes
+.SUFFIXES: .o .cpp
+# define a suffix fule for .cpp -> .o
+# this means you don't have to write an individual rule for each source file!! wonderful!
+# ISNT MAKE JUST AMAZING
+.cpp.o:
+	$(CXX) $(CPPFLAGS) -c $<
+
+#here we begin our make rules
+all: $(EXE)
+
+$(EXE): $(OBJS)
+	$(LD) $(CPPFLAGS) -o $@ $(OBJS) $(LDFLAGS)
+
+clean:
+	$(RM) -f $(EXE) $(OBJS)
