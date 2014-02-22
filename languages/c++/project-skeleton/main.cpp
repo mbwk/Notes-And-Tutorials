@@ -4,8 +4,7 @@
  *  Author:   Karl M. B.
  *  Github:   mbwk
  *  Twitter:  @mbwkarl
- *  Email:    bi4ka3er3@gmail.com
- *  XMPP:     miyabe@xmpp.jp
+ *  IRC:      miyabe ON #sandbox @ irc.fyrechat.net
  *  Website:  www.mbwkarl.com
  */
 
