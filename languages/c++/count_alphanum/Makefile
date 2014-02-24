@@ -17,8 +17,8 @@
 
 # Tool up!
 # Compilers:
-CC		= gcc
-CXX		= g++
+CC		= clang
+CXX		= clang++
 # C Compilation flags
 CSTD		= -std=c99 -pedantic
 CWARN		= -Wall -Werror

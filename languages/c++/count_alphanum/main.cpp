@@ -39,6 +39,12 @@
 #include <map>
 #include <algorithm>
 #include <string>
+#include <sstream>
+
+std::string get_file_contents(const char *filename);
+std::map<char, int> * build_charmap(const std::string &instr);
+std::string check_for_alphanums(std::string &instr);
+std::string construct_outstr(std::map<char, int> in_charmap);
 
 // SNIP: http://stackoverflow.com/questions/2602013/
 std::string get_file_contents(const char *filename)
@@ -57,33 +63,43 @@ std::string get_file_contents(const char *filename)
   throw(errno);
 }
 
-std::string * check_for_alphanums(std::string &instr)
+std::map<char, int> * build_charmap(const std::string &instr)
+{
+  std::map<char, int> * charmap = new std::map<char, int>();
+  for (const char& c : instr)
+  {
+    if ((' ' == c) || ('\n' == c))
+    {
+    }
+    else if (!charmap->count(c))
+    {
+      charmap->insert( std::pair<char,int>(c, 1) );
+    }
+    else
+    {
+      ++charmap->at(c);
+    }
+  }
+  return charmap;
+}
+
+std::string construct_outstr(std::map<char, int> * in_charmap) {
+  std::stringstream mystream;
+  for(std::map<char, int>::iterator it = in_charmap->begin();
+      it != in_charmap->end(); ++it)
+  {
+    mystream << "char \'" << it->first << "\' appears "
+      << it->second << " times in your input." << std::endl;
+  }
+  return mystream.str();
+}
+
+std::string check_for_alphanums(std::string &instr)
 {
   std::transform(instr.begin(), instr.end(), instr.begin(), ::tolower);
-  std::map<char, int> charmap; // le ebin hashmap faec
-  std::string * outstr = new std::string;
-  for (char& c : instr)
-  {
-    if ((' ' == c) || ('\n' == c)) {
-      std::cout << "Whitespace, ignoring...\n";
-    }
-    else if (!charmap.count(c))
-    {
-      std::cout << "undiscovered char \'" << c
-        << "\' found, adding new pair to hashmap...\n";
-      charmap.insert( std::pair<char,int>(c, 1) );
-    } else {
-      std::cout << "Pre-existing char \'" << c
-        << "\' found, incrementing corresponding key...\n";
-      ++charmap.at(c);
-    }
-  }
-/*
-  for ()
-  {
-    // for each key - value in charmap - print to stdout
-  }
-*/
+  std::map<char, int> * charmap = build_charmap(instr); // le ebin hashmap faec
+  std::string outstr = construct_outstr(charmap);
+  delete charmap;
   return outstr;
 }
 
@@ -102,7 +118,10 @@ int main(int argc, char ** argv)
     std::cout << "Please enter your sentence: ";
     std::getline(std::cin, input);
   }
-
+  std::cout << "This string contains:\n"
+    << check_for_alphanums(input)
+    << '\n'
+    << std::endl;
   std::cout << "  ============\n";
   std::cout << "  End of test.\n" << std::endl;
   return 0;
