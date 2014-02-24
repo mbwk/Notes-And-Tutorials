@@ -61,7 +61,7 @@ std::map<char, int> * build_charmap(const std::string &instr)
   std::map<char, int> * charmap = new std::map<char, int>();
   for (const char& c : instr)
   {
-    if ((' ' == c) || ('\n' == c))
+    if (!std::isalnum(c))
     {
     }
     else if (!charmap->count(c))
@@ -81,8 +81,15 @@ std::string construct_outstr(std::map<char, int> * in_charmap) {
   for(std::map<char, int>::iterator it = in_charmap->begin();
       it != in_charmap->end(); ++it)
   {
-    mystream << "char \'" << it->first << "\' appears "
-      << it->second << " times in your input." << std::endl;
+    char c = it->first;
+    int t = it->second;
+    std::string plural = "s";
+    if (1 == t)
+    {
+      plural = "";
+    }
+    mystream << "char \'" << c << "\' appears "
+      << t << " time" << plural << " in your input." << std::endl;
   }
   return mystream.str();
 }
@@ -113,8 +120,7 @@ int main(int argc, char ** argv)
   }
   std::cout << "This string contains:\n"
     << check_for_alphanums(input)
-    << '\n'
-    << std::endl;
+    << std::flush;
   std::cout << "  ============\n";
   std::cout << "  End of test.\n" << std::endl;
   return 0;
