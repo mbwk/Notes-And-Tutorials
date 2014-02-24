@@ -23,14 +23,7 @@
  *  TODO list:
  *  1. File I/O - done
  *  2. Handling input - done
- *  3. Counting alphanums with a std::map - wip
- *  4. Selecting output method - tbc
- *  5. Sorting algorithms - tbc
- *    a.) Bubble sort
- *    b.) Selection sort
- *    c.) Insertion sort
- *    d.) Shell sort
- *    e.) Quick sort
+ *  3. Counting alphanums with a std::map - done
  */
 
 #include <iostream>
