@@ -1,0 +1,79 @@
+# plug and play Makefile by Karl Birch (mbwkarl.com)
+# 
+# an even easier makefile to use for simple compiled programs
+#
+# gnu make handles new/renamed files by itself. just remember to
+# make clean after some serious refactoring
+#
+# INSTRUCTIONS:
+# 1. download to project root
+# 2. mkdir src include build
+# 	a. if using git, create a suitable .gitignore in build/
+# 		(empty directories are ignored by git)
+# 3. organize your files:
+# 	a. source files (.cc) go under src/
+# 	b. header files (.hh) go under include/
+# 4. replace EXECUTABLE_NAME to whatever you want
+# 5. makefile is now ready to use
+#
+# OPTIONAL:
+# - link to a library you are using (see LDFLAGS)
+# - change compiler flags
+# - change compiler (e.g: clang++)
+# - change suffixes (e.g: .cpp instead of .cc)
+# - change directory names
+#
+
+# compilers
+CC				= gcc
+CXX				= g++
+
+# compiler flags for C and C++ respectively
+CFLAGS				= -fdiagnostics-color=always \
+				  -fdiagnostics-show-location=once \
+				  -std=c11 -Wall -Werror -pedantic \
+				  -Wfatal-errors -g -iquote include/
+
+CPPFLAGS			= -fdiagnostics-color=always \
+				  -fdiagnostics-show-location=once \
+				  -std=c++11 -Wall -Werror -pedantic \
+				  -Wfatal-errors -g -iquote include/
+
+# linker. gcc can handle this
+LD				= $(CXX)
+
+# linker flags - this is where you link your executable against a library
+# e.g: -lboost_system
+# i.e: library "libfoo" on your system is linked with "-lfoo"
+LDFLAGS				= 
+
+# additional utilities
+STRIP				= strip --strip-unneeded
+RM				= rm
+
+# project directories
+SRCDIR				= src
+OBJDIR				= build
+
+# files, deduced by make every time it is run
+SRCS				= ${wildcard $(SRCDIR)/*.cc}
+OBJS				= ${patsubst src/%.cc,build/%.o,$(SRCS)}
+EXE				= EXECUTABLE_NAME
+
+# user defined template
+build/%.o: src/%.cc
+				$(CXX) $(CPPFLAGS) -c $< -o $@
+
+# below are all rules
+all: $(EXE)
+
+$(EXE): $(OBJS)
+				$(LD) $(CPPFLAGS) -o $@ $(OBJS) $(LDFLAGS)
+
+# all object files in OBJDIR are purged along with executable
+clean:
+				$(RM) -f $(EXE) ${wildcard $(OBJDIR)/*.o}
+
+dist: $(EXE)
+				$(STRIP) $(EXE)
+
