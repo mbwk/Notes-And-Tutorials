@@ -20,7 +20,7 @@
 # - link to a library you are using (see LDFLAGS)
 # - change compiler flags
 # - change compiler (e.g: clang++)
-# - change suffixes (e.g: .cpp instead of .cc)
+# - change suffixes (e.g: .c instead of .cpp)
 # - change directory names
 #
 
@@ -44,24 +44,31 @@ LD				= $(CXX)
 
 # linker flags - this is where you link your executable against a library
 # e.g: -lboost_system
-# i.e: library "libfoo" on your system is linked with "-lfoo"
+# i.e: library "libfoo.so" on your system is linked with "-lfoo"
 LDFLAGS				= 
 
 # additional utilities
 STRIP				= strip --strip-unneeded
 RM				= rm
 
+# ctags is a utility that helps navigation in c source files
+# i use it with vim. install ctags to use it
+# if you are using it, uncomment the next line
+# and the appropriate line under $(EXE)
+CTAGS				= ctags -R
+
 # project directories
 SRCDIR				= src
 OBJDIR				= build
 
 # files, deduced by make every time it is run
-SRCS				= ${wildcard $(SRCDIR)/*.cc}
-OBJS				= ${patsubst src/%.cc,build/%.o,$(SRCS)}
+SRCS				= ${wildcard $(SRCDIR)/*.cpp}
+HDRS				= ${patsubst src/%.cpp,include/%.hpp,$(SRCS)}
+OBJS				= ${patsubst src/%.cpp,build/%.o,$(SRCS)}
 EXE				= EXECUTABLE_NAME
 
 # user defined template
-build/%.o: src/%.cc
+build/%.o: src/%.cpp
 				$(CXX) $(CPPFLAGS) -c $< -o $@
 
 # below are all rules
@@ -69,6 +76,7 @@ all: $(EXE)
 
 $(EXE): $(OBJS)
 				$(LD) $(CPPFLAGS) -o $@ $(OBJS) $(LDFLAGS)
+#				$(CTAGS) $(SRCS) $(HDRS)
 
 # all object files in OBJDIR are purged along with executable
 clean:
