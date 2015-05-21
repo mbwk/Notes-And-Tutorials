@@ -59,11 +59,12 @@ CTAGS				= ctags -R
 
 # project directories
 SRCDIR				= src
+INCDIR				= include
 OBJDIR				= build
 
 # files, deduced by make every time it is run
 SRCS				= ${wildcard $(SRCDIR)/*.cpp}
-HDRS				= ${patsubst src/%.cpp,include/%.hpp,$(SRCS)}
+HDRS				= ${wildcard $(INCDIR)/*.hpp}
 OBJS				= ${patsubst src/%.cpp,build/%.o,$(SRCS)}
 EXE				= EXECUTABLE_NAME
 
