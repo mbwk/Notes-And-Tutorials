@@ -3,6 +3,8 @@
 #
 # Edit and save as just "CMakeLists.txt"
 #
+# Attribution: http://stackoverflow.com/a/17938228
+#
 # # # # # # # #
 # Background: #
 # # # # # # # #
