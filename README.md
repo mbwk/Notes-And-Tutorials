@@ -4,6 +4,7 @@ Notes-And-Tutorials
 Public repo dedicated to holding my notes for things like build tools,
 language/library peculiarities, configurations, etc
 
+
 About
 -----
 
@@ -12,20 +13,25 @@ it so that I don't have to go Google searching for hours to find the same pages
 every few months, just so I can read them for 5 seconds and immediately
 remember everything.
 
+
 Contributing
 ------------
 
-If you find these useful, then great! If you see anything wrong with anything
-in this repo, I'd appreciate it if you'd let me know.
+If you see anything wrong with anything in this repo, I'd appreciate it if
+you'd let me know.
 
-Notes and guides for any mainstream language are welcome in this repo, though
-I will mostly be focusing on C++ and Unix/Linux stuff. I'm thinking about
-adding algorithm walkthroughs, too.
+While this is a very Unix-centric repo, useful information on developing
+for/on other platforms is very welcome.
 
-Legal stuff
------------
+Recent additions include examples and notes on my favourite build systems,
+some config files I feel comfortable sharing with the world, and notes on
+technologies that I am learning to use.
 
-Any original code contained in this repo is BSD-2. Any code I've reference
-from another source (usually through a web link) belongs to the guy who
-wrote it.
+
+Legal
+-----
+
+With the obvious exception of any code I've not written myself (which I
+always make note of, usually with a web link), all information contained within
+this repo is released into the Public Domain (see LICENSE for an elaboration).
 
