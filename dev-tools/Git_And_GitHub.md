@@ -3,34 +3,8 @@ Git
 
 See [this FAQ page](https://help.github.com/articles/git-cheatsheet) for the git cheatsheet.
 
-Often used commands
--------------------
+Pending a rewrite
 
-git clone - copies a git repo to the working directory
-
-git add X - adds X to commit, where X is a file
-
-git rm X - removes instead of adds
-
-git commit -m "Your commit message here" - fast way to write commit messages
-
-git push - pushes to whichever place it is configured to
-
-git pull - pulls from ""
-
-Important commands
-------------------
-
-### git revert
-
-### git reset
-
-### git branch
-
-### git checkout
-
-GitHub
-======
 
 SSH Keys
 --------
